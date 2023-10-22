@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<h1>Le nombre des auteurs est : {{ authors | length }}</h1>
+    <table border="1">
+            <tr>
+                <th>Id</th>
+                <th>Picture</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>nb_books</th>
+                <th>Lien</th>
+            </tr>
+        {% for auth in authors %}
+            <tr>
+
+                <td>{{auth.id}}</td>
+                <td><img src="{{auth.picture}}" alt=""/></td>
+                <td>{{auth.username | upper}}</td>
+                <td>{{auth.email}}</td>
+                <td>{{auth.nb_books}}</td>
+                <td><a href="{{path('app-auth-details',{'id':auth.id})}}">details</a></td>
+            </tr>
+                {% else %}
+                    <h1>Tableau Vide</h1>
+                {% endfor %}
+    </table>
+{% set nbTotal=0 %}
+{% for a in authors %}
+    {% set nbTotal=nbTotal+a.nb_books %}
+{% endfor %}
+<p>Le nombre totale des livres de tous les auteurs est : {{ nbTotal }}</p>
+</body>
+</html>
